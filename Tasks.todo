@@ -6,9 +6,8 @@ Create a products from a form page:
   -Look for duplicated keys
 
 Endpoint to fetch all products:
-  ☐ Filter
-    ☐ Category
   ☐ Sort
+    ☐ Category
     ☐ Max-min
     ☐ Min-max
   ☐ Page size of 24

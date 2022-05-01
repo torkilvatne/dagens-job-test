@@ -34,4 +34,5 @@ process.on('SIGINT', function () {
   process.exit();
 });
 
+app.get('/products', productController.getProducts);
 app.post('/product', productController.createProduct);

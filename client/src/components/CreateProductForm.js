@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import postEndpoint from '../services/apiService';
+import ApiService from '../services/apiService';
 
 /**
  * File improvements
@@ -9,6 +9,7 @@ import postEndpoint from '../services/apiService';
  * - Price field value display format
  * - Exctract fields into independent components for flexibility (types, validations, formatting)
  * - Set up tests for form
+ * - Improved feedback to user
  */
 
 const CreateProductForm = () => {
@@ -23,7 +24,7 @@ const CreateProductForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    postEndpoint('product', 'POST', updateFieldInputs).then((res) => {
+    ApiService.postEndpoint('product', updateFieldInputs).then((res) => {
       if (res.status === 200) {
         setFeedback("Product '" + updateFieldInputs.name + "' created.");
         setUpdateFieldInputs({});

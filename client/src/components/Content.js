@@ -10,7 +10,7 @@ import SeeView from './See/SeeView';
  */
 
 const Content = () => {
-  const [view, setView] = useState('edit');
+  const [view, setView] = useState('see');
   const handleOnRadioButtonChange = (e) => {
     setView(e.target.id);
   };
@@ -30,6 +30,7 @@ const Content = () => {
         name={'See products'}
         onChange={handleOnRadioButtonChange}
       />
+      <hr />
       {view === 'edit' && <EditView />}
       {view === 'see' && <SeeView />}
     </div>
