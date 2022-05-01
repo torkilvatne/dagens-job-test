@@ -14,7 +14,10 @@ const createNewProduct = (name, category, price) => {
 };
 
 const withOffset = (products, offset) => {
-  return products.slice(offset, offset + PRODUCTS_PER_PAGE);
+  return products.slice(
+    offset * PRODUCTS_PER_PAGE,
+    offset * PRODUCTS_PER_PAGE + PRODUCTS_PER_PAGE
+  );
 };
 
 const sortedByKey = (products, sortingKey) => {

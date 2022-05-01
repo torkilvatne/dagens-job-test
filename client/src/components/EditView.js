@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateProductForm from '../CreateProductForm';
+import CreateProductForm from './CreateProductForm';
 
 const EditView = () => {
   return (

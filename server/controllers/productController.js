@@ -5,9 +5,6 @@ class ProductController {
   getProducts(req, res) {
     // TODO: Add try/catch for fetching of data
     let products = dbService.getAllProducts();
-    if (req.query.offset) {
-      products = serverUtils.withOffset(products, parseInt(req.query.offset));
-    }
     if (req.query.sort) {
       if (req.query.sort === 'asc') {
         products = serverUtils.sortedByAsc(products);
@@ -16,6 +13,9 @@ class ProductController {
       } else {
         products = serverUtils.sortedByKey(products, req.query.sort);
       }
+    }
+    if (req.query.offset) {
+      products = serverUtils.withOffset(products, parseInt(req.query.offset));
     }
     res.status(200).send(products);
   }

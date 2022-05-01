@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import RadioButton from './FormElements/RadioButton';
-import EditView from './Edit/EditView';
-import SeeView from './See/SeeView';
+import EditView from './EditView';
+import SeeView from './SeeView';
 
 /**
  * File improvements:

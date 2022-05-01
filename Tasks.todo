@@ -6,12 +6,13 @@ Create a products from a form page:
   -Look for duplicated keys
 
 Endpoint to fetch all products:
-  ☐ Sort
-    ☐ Category
-    ☐ Max-min
-    ☐ Min-max
+  ✔ Sort @done(22-05-01 19:12)
+    ✔ Category @done(22-05-01 19:12)
+    ✔ Max-min @done(22-05-01 19:12)
+    ✔ Min-max @done(22-05-01 19:12)
   ☐ Page size of 24
-    ☐ Add offset to API endpoint
+    ✔ Add offset to API endpoint @done(22-05-01 17:57)
+    ☐ Frontend pagination
 
 Endpoint to fetch products with nearest price in same category:
   ☐ What is N
