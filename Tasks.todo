@@ -15,11 +15,11 @@ Endpoint to fetch all products:
     ✔ Frontend pagination @done(22-05-01 19:38)
 
 Endpoint to fetch products with nearest price in same category:
-  ☐ What is N
-  ☐ Create a diff-func
-    ☐ Go through products and create "text (id) : int (diff)" -map and sort.
-      ☐ Include offset
-  ☐ Checkbox (Higher/lower price) ?
+  ✔ What is N @done(22-05-01 21:57)
+  ✔ Create a diff-func @done(22-05-01 21:57)
+    ✔ Go through products and create "text (id) : int (diff)" -map and sort. @done(22-05-01 21:57)
+      ✔ Include offset @done(22-05-01 21:57)
+  ✔ Checkbox (Higher/lower price) ? @done(22-05-01 21:57)
 
 
 Structure:
