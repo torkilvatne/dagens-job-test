@@ -74,7 +74,7 @@ const FindSimilarView = () => {
         products={products}
         page={page}
         setPage={setPage}
-        maxProductAmount={1000}
+        maxProductAmount={100}
       />
     </div>
   );

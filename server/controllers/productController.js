@@ -7,9 +7,9 @@ class ProductController {
     let products = dbService.getAllProducts();
     if (req.query.sort) {
       if (req.query.sort === 'asc') {
-        products = serverUtils.sortedByAsc(products);
+        products = serverUtils.sortedByAsc(products, 'price');
       } else if (req.query.sort === 'desc') {
-        products = serverUtils.sortedByDesc(products);
+        products = serverUtils.sortedByDesc(products, 'price');
       } else {
         products = serverUtils.sortedByKey(products, req.query.sort);
       }

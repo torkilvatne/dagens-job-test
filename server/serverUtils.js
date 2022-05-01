@@ -1,5 +1,10 @@
 const products = require('./db/db');
 
+/**
+ * File improvements:
+ * - findSimilarProducts can be optimized by better sorting algorithms and check for diff in +/-
+ */
+
 const PRODUCTS_PER_PAGE = 24;
 
 const generateProductId = () => {
@@ -26,12 +31,12 @@ const sortedByKey = (products, sortingKey) => {
   return products.sort((a, b) => sortBy(a[sortingKey], b[sortingKey]));
 };
 
-const sortedByAsc = (products) => {
-  return products.sort((a, b) => a.price - b.price);
+const sortedByAsc = (products, key) => {
+  return products.sort((a, b) => a[key] - b[key]);
 };
 
-const sortedByDesc = (products) => {
-  return products.sort((a, b) => b.price - a.price);
+const sortedByDesc = (products, key) => {
+  return products.sort((a, b) => b[key] - a[key]);
 };
 
 const filteredBy = (products, key, value) => {
@@ -52,12 +57,14 @@ const sortBy = (a, b) => {
 };
 
 const findSimilarProducts = (products, target) => {
-  const productsInSameCategory = filteredBy(
-    products,
-    'category',
-    target.category
-  );
-  return productsInSameCategory;
+  let similarProducts = filteredBy(products, 'category', target.category);
+  similarProducts = similarProducts.map((p) => ({
+    ...p,
+    diff: Math.abs(target.price - p.price),
+  }));
+
+  similarProducts = sortedByAsc(similarProducts, 'diff');
+  return similarProducts;
 };
 
 module.exports.createNewProduct = createNewProduct;
