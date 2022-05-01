@@ -1,5 +1,4 @@
 const products = require('./db');
-const serverUtils = require('../serverUtils');
 
 const getAllProducts = () => {
   return products;

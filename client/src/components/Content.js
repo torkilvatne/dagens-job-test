@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RadioButton from './FormElements/RadioButton';
-import EditView from './EditView';
+import AddView from './AddView';
 import SeeView from './SeeView';
 
 /**
@@ -10,7 +10,7 @@ import SeeView from './SeeView';
  */
 
 const Content = () => {
-  const [view, setView] = useState('see');
+  const [view, setView] = useState('add');
   const handleOnRadioButtonChange = (e) => {
     setView(e.target.id);
   };
@@ -18,9 +18,9 @@ const Content = () => {
   return (
     <div>
       <RadioButton
-        id={'edit'}
-        checked={view === 'edit'}
-        name={'Edit products'}
+        id={'add'}
+        checked={view === 'add'}
+        name={'Add products'}
         onChange={handleOnRadioButtonChange}
       />
       <br />
@@ -31,7 +31,7 @@ const Content = () => {
         onChange={handleOnRadioButtonChange}
       />
       <hr />
-      {view === 'edit' && <EditView />}
+      {view === 'add' && <AddView />}
       {view === 'see' && <SeeView />}
     </div>
   );

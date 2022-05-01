@@ -1,13 +1,13 @@
 import React from 'react';
 import CreateProductForm from './CreateProductForm';
 
-const EditView = () => {
+const AddView = () => {
   return (
     <div>
-      <h2>Edit products</h2>
+      <h2>Add products</h2>
       <CreateProductForm />
     </div>
   );
 };
 
-export default EditView;
+export default AddView;
