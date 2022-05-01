@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import postEndpoint from '../services/apiService';
 
 /**
  * File improvements
@@ -21,13 +22,7 @@ const CreateProductForm = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    fetch('http://localhost:3001/product', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updateFieldInputs),
-    });
+    postEndpoint('product', 'POST', updateFieldInputs);
     //setUpdateFieldInputs({});
   };
 
@@ -37,7 +32,7 @@ const CreateProductForm = () => {
       <input
         type="text"
         name="name"
-        value={updateFieldInputs.product_name || ''}
+        value={updateFieldInputs.name || ''}
         onChange={handleFormValueUpdate}
       />
       <br />
@@ -53,7 +48,7 @@ const CreateProductForm = () => {
       <input
         type="number"
         name="price"
-        value={updateFieldInputs.product_price || ''}
+        value={updateFieldInputs.price || ''}
         onChange={handleFormValueUpdate}
       />
       <br />
