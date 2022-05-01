@@ -20,6 +20,17 @@ const ApiService = {
       }
     );
   },
+  getSmiliarEndpoint: async function (endpoint, body) {
+    return await fetch(
+      'http://localhost:3001/' + endpoint + '?' + createQueryParam(body),
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  },
 };
 
 export default ApiService;
