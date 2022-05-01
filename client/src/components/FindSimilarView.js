@@ -2,11 +2,39 @@ import React, { useState, useEffect } from 'react';
 import ApiService from '../services/apiService';
 import ProductTable from './ProductTable';
 
+/**
+ * File improvements:
+ * - Get matching product and display it's information to the user for better overview.
+ */
+
 const FindSimilarView = () => {
   const [products, setProducts] = useState([]);
-  const [productId, setProductId] = useState([]);
-  const [page, setPage] = useState(40);
+  const [productId, setProductId] = useState(
+    'a8f35698-f133-487b-8c6e-0c81ff626f69'
+  );
+  const [page, setPage] = useState(0);
   const [feedback, setFeedback] = useState('');
+
+  const getProducts = (pId) => {
+    ApiService.getSmiliarEndpoint(pId, {
+      offset: page,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res;
+        } else if (res.status === 404) {
+          throw new Error('ID not found.');
+        } else {
+          throw new Error('Something went wrong.');
+        }
+      })
+      .then((res) => res.json())
+      .then((res) => setProducts(res))
+      .catch((error) => {
+        setFeedback(error.message);
+        setProducts([]);
+      });
+  };
 
   const handleFieldUpdate = (e) => {
     setProductId(e.target.value);
@@ -14,14 +42,14 @@ const FindSimilarView = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    ApiService.postEndpoint(productId).then((res) => {
-      if (res.status === 200) {
-        setProducts(res);
-      } else {
-        setFeedback('Something went wrong.');
-      }
-    });
+    getProducts(productId);
   };
+
+  useEffect(() => {
+    if (productId !== '') {
+      getProducts(productId);
+    }
+  }, [page]);
 
   return (
     <div>
@@ -41,7 +69,13 @@ const FindSimilarView = () => {
           <b>{feedback}</b>
         </p>
       )}
-      <ProductTable products={products} page={page} setPage={setPage} />
+      {/* Implement response count to make pagination work here */}
+      <ProductTable
+        products={products}
+        page={page}
+        setPage={setPage}
+        maxProductAmount={1000}
+      />
     </div>
   );
 };

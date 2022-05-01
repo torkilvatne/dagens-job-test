@@ -35,4 +35,5 @@ process.on('SIGINT', function () {
 });
 
 app.get('/products', productController.getProducts);
+app.get('/similarProducts', productController.getSimilarProducts);
 app.post('/product', productController.createProduct);

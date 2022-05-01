@@ -20,6 +20,29 @@ class ProductController {
     res.status(200).send(products);
   }
 
+  getSimilarProducts(req, res) {
+    // TODO: Add try/catch for fetching of data
+    if (req.query.productId) {
+      try {
+        const product = dbService.findProductById(req.query.productId);
+        const simiarProducts = serverUtils.findSimilarProducts(
+          dbService.getAllProducts(),
+          product
+        );
+        // TODO: Validate if 'offset' excists
+        const productOffset = serverUtils.withOffset(
+          simiarProducts,
+          parseInt(req.query.offset)
+        );
+        res.status(200).send(productOffset);
+      } catch (error) {
+        res.status(404).send('No product for id ' + req.query.productId);
+      }
+    } else {
+      res.status(200).send([]);
+    }
+  }
+
   createProduct(req, res) {
     // TODO: Validate data
     // TODO: Check for duplicated products

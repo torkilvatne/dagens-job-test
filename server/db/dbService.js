@@ -5,10 +5,11 @@ const getAllProducts = () => {
 };
 
 const findProductById = (id) => {
-  const product = products.filter((p) => p.id === id);
-  if (product.length == 0) {
+  const product = products.find((p) => p.id === id);
+  if (product === null) {
     throw new Error();
   }
+  return product;
 };
 
 const postNewProduct = (newProduct) => {

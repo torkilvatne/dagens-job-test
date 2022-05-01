@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import RadioButton from './FormElements/RadioButton';
 import AddView from './AddView';
 import SeeView from './SeeView';
-import FindFamiliarView from './FindFamiliarView';
+import FindSimilarView from './FindSimilarView';
 
 /**
  * File improvements:
@@ -11,7 +11,7 @@ import FindFamiliarView from './FindFamiliarView';
  */
 
 const Content = () => {
-  const [view, setView] = useState('add');
+  const [view, setView] = useState('findSimilar');
   const handleOnRadioButtonChange = (e) => {
     setView(e.target.id);
   };
@@ -33,15 +33,15 @@ const Content = () => {
       />
       <br />
       <RadioButton
-        id={'findFamiliar'}
-        checked={view === 'findFamiliar'}
-        name={'Find familiar products'}
+        id={'findSimilar'}
+        checked={view === 'findSimilar'}
+        name={'Find similar products'}
         onChange={handleOnRadioButtonChange}
       />
       <hr />
       {view === 'add' && <AddView />}
       {view === 'see' && <SeeView />}
-      {view === 'see' && <FindFamiliarView />}
+      {view === 'findSimilar' && <FindSimilarView />}
     </div>
   );
 };

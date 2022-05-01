@@ -20,9 +20,12 @@ const ApiService = {
       }
     );
   },
-  getSmiliarEndpoint: async function (endpoint, body) {
+  getSmiliarEndpoint: async function (productId, body) {
     return await fetch(
-      'http://localhost:3001/' + endpoint + '?' + createQueryParam(body),
+      'http://localhost:3001/similarProducts?' +
+        createQueryParam(body) +
+        '&productId=' +
+        productId,
       {
         method: 'GET',
         headers: {

@@ -11,9 +11,10 @@ import ProductTable from './ProductTable';
 const SeeView = () => {
   const [sortBy, setSortBy] = useState(null);
   const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(40);
+  const [page, setPage] = useState(0);
 
   const getProducts = () => {
+    // Create catch block for error handling
     ApiService.getEndpoint('products', getOptions())
       .then((res) => res.json())
       .then((res) => setProducts(res));
@@ -51,7 +52,13 @@ const SeeView = () => {
         <option value="asc">Price low - high</option>
         <option value="desc">Price high - low</option>
       </select>
-      <ProductTable products={products} page={page} setPage={setPage} />
+      {/* Here, pagination only works because we know it's 1000 products in DB */}
+      <ProductTable
+        products={products}
+        page={page}
+        setPage={setPage}
+        maxProductAmount={1000}
+      />
     </div>
   );
 };

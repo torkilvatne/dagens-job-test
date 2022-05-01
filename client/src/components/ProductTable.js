@@ -6,7 +6,7 @@ import React from 'react';
  * - Generalize columns to have one uniform table component
  */
 
-const ProductTable = ({ products, page, setPage }) => {
+const ProductTable = ({ products, page, setPage, maxProductAmount }) => {
   const PRODUCTS_PER_PAGE = 24;
 
   const goToNextPage = () => {
@@ -51,7 +51,7 @@ const ProductTable = ({ products, page, setPage }) => {
         <button onClick={() => goToPreviousPage()}>Previous page</button>
       )}
       <b>{page + 1}</b>
-      {page !== Math.floor(1000 / PRODUCTS_PER_PAGE) && (
+      {page !== Math.floor(maxProductAmount / PRODUCTS_PER_PAGE) && (
         <button onClick={() => goToNextPage()}>Next page</button>
       )}
     </>

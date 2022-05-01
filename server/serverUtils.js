@@ -1,3 +1,5 @@
+const products = require('./db/db');
+
 const PRODUCTS_PER_PAGE = 24;
 
 const generateProductId = () => {
@@ -32,6 +34,10 @@ const sortedByDesc = (products) => {
   return products.sort((a, b) => b.price - a.price);
 };
 
+const filteredBy = (products, key, value) => {
+  return products.filter((p) => p[key] === value);
+};
+
 const sortBy = (a, b) => {
   a = a.toUpperCase();
   b = b.toUpperCase();
@@ -45,9 +51,19 @@ const sortBy = (a, b) => {
   return 0;
 };
 
+const findSimilarProducts = (products, target) => {
+  const productsInSameCategory = filteredBy(
+    products,
+    'category',
+    target.category
+  );
+  return productsInSameCategory;
+};
+
 module.exports.createNewProduct = createNewProduct;
 module.exports.sortBy = sortBy;
 module.exports.withOffset = withOffset;
 module.exports.sortedByKey = sortedByKey;
 module.exports.sortedByAsc = sortedByAsc;
 module.exports.sortedByDesc = sortedByDesc;
+module.exports.findSimilarProducts = findSimilarProducts;
