@@ -6,6 +6,7 @@ const products = require('./db/db');
  */
 
 const PRODUCTS_PER_PAGE = 24;
+const N = 200;
 
 const generateProductId = () => {
   return Date.now().toString(2) + Math.floor(Math.random() * 1000);
@@ -64,7 +65,7 @@ const findSimilarProducts = (products, target) => {
   }));
 
   similarProducts = sortedByAsc(similarProducts, 'diff');
-  return similarProducts;
+  return similarProducts.slice(0, N);
 };
 
 module.exports.createNewProduct = createNewProduct;
