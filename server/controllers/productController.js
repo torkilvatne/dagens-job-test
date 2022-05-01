@@ -1,6 +1,11 @@
 const dbService = require('../db/dbService');
 const serverUtils = require('../serverUtils');
 
+/**
+ * File improvements:
+ * - Seperate sorting into utils and create a more robust and flexible sorting
+ */
+
 class ProductController {
   getProducts(req, res) {
     // TODO: Add try/catch for fetching of data

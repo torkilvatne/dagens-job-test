@@ -9,9 +9,7 @@ import ProductTable from './ProductTable';
 
 const FindSimilarView = () => {
   const [products, setProducts] = useState([]);
-  const [productId, setProductId] = useState(
-    'a8f35698-f133-487b-8c6e-0c81ff626f69'
-  );
+  const [productId, setProductId] = useState('');
   const [page, setPage] = useState(0);
   const [feedback, setFeedback] = useState('');
 
@@ -62,7 +60,7 @@ const FindSimilarView = () => {
           onChange={handleFieldUpdate}
         />
         <br />
-        <input type="submit" value={'Send inn'} />
+        <input type="submit" value={'Find'} />
       </form>
       {feedback !== '' && (
         <p style={{ color: 'orange' }}>

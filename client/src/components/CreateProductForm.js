@@ -10,6 +10,7 @@ import ApiService from '../services/apiService';
  * - Exctract fields into independent components for flexibility (types, validations, formatting)
  * - Set up tests for form
  * - Improved feedback to user
+ * - Set up a better solution for adding category (Select-input and "create new category"-component)
  */
 
 const CreateProductForm = () => {
