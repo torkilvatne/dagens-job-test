@@ -1,4 +1,4 @@
-# Dagens Job Test - [Submission] Torkil S. Vatne
+# Dagens Job Test - Submission [Torkil S. Vatne]
 
 Hi applicant!
 

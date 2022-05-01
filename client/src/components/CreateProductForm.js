@@ -13,6 +13,7 @@ import postEndpoint from '../services/apiService';
 
 const CreateProductForm = () => {
   const [updateFieldInputs, setUpdateFieldInputs] = useState({});
+  const [feedback, setFeedback] = useState('');
 
   const handleFormValueUpdate = (event) => {
     const name = event.target.name;
@@ -20,40 +21,53 @@ const CreateProductForm = () => {
     setUpdateFieldInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    postEndpoint('product', 'POST', updateFieldInputs);
-    //setUpdateFieldInputs({});
+    postEndpoint('product', 'POST', updateFieldInputs).then((res) => {
+      if (res.status === 200) {
+        setFeedback("Product '" + updateFieldInputs.name + "' created.");
+        setUpdateFieldInputs({});
+      } else {
+        setFeedback('Something went wrong.');
+      }
+    });
   };
 
   return (
-    <form onSubmit={handleFormSubmit} id="createPorduct">
-      <label>Name</label>
-      <input
-        type="text"
-        name="name"
-        value={updateFieldInputs.name || ''}
-        onChange={handleFormValueUpdate}
-      />
-      <br />
-      <label>Category</label>
-      <input
-        type="text"
-        name="category"
-        value={updateFieldInputs.category || ''}
-        onChange={handleFormValueUpdate}
-      />
-      <br />
-      <label>Price</label>
-      <input
-        type="number"
-        name="price"
-        value={updateFieldInputs.price || ''}
-        onChange={handleFormValueUpdate}
-      />
-      <br />
-      <input type="submit" value={'Send inn'} />
-    </form>
+    <div>
+      {feedback !== '' && (
+        <p style={{ color: 'orange' }}>
+          <b>{feedback}</b>
+        </p>
+      )}
+      <form onSubmit={handleFormSubmit} id="createPorduct">
+        <label>Name</label>
+        <input
+          type="text"
+          name="name"
+          value={updateFieldInputs.name || ''}
+          onChange={handleFormValueUpdate}
+        />
+        <br />
+        <label>Category</label>
+        <input
+          type="text"
+          name="category"
+          value={updateFieldInputs.category || ''}
+          onChange={handleFormValueUpdate}
+        />
+        <br />
+        <label>Price</label>
+        <input
+          type="number"
+          name="price"
+          value={updateFieldInputs.price || ''}
+          onChange={handleFormValueUpdate}
+        />
+        <br />
+        <input type="submit" value={'Send inn'} />
+      </form>
+    </div>
   );
 };
 

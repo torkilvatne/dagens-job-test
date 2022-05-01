@@ -1,8 +1,8 @@
 Create a products from a form page:
   ✔ Create a form @done(22-05-01 14:58)
-  ☐ Create API
-  ☐ Create product ID
-  ☐ Add to DB
+  ✔ Create API @done(22-05-01 16:52)
+  ✔ Create product ID @done(22-05-01 16:52)
+  ✔ Add to DB @done(22-05-01 16:52)
   -Look for duplicated keys
 
 Endpoint to fetch all products:
