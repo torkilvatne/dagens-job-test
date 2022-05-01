@@ -4,10 +4,20 @@ const serverUtils = require('../serverUtils');
 class ProductController {
   getProducts(req, res) {
     // TODO: Add try/catch for fetching of data
+    let products = dbService.getAllProducts();
     if (req.query.offset) {
-      res.status(200).send(dbService.getProducts(req.query.offset));
+      products = serverUtils.withOffset(products, parseInt(req.query.offset));
     }
-    res.status(200).send(dbService.getAllProducts());
+    if (req.query.sort) {
+      if (req.query.sort === 'asc') {
+        products = serverUtils.sortedByAsc(products);
+      } else if (req.query.sort === 'desc') {
+        products = serverUtils.sortedByDesc(products);
+      } else {
+        products = serverUtils.sortedByKey(products, req.query.sort);
+      }
+    }
+    res.status(200).send(products);
   }
 
   createProduct(req, res) {

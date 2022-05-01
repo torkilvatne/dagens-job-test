@@ -41,7 +41,7 @@ const CreateProductForm = () => {
           <b>{feedback}</b>
         </p>
       )}
-      <form onSubmit={handleFormSubmit} id="createPorduct">
+      <form onSubmit={handleFormSubmit} id="createProduct">
         <label>Name</label>
         <input
           type="text"
