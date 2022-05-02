@@ -3,7 +3,8 @@ const serverUtils = require('../serverUtils');
 
 /**
  * File improvements:
- * - Seperate sorting into utils and create a more robust and flexible sorting
+ * - Can create more indepented endpoints in this API to make searching more efficient in some cases
+ * - Seperate sorting/filtering into utils and create a more robust and flexible sorting/filtering
  */
 
 class ProductController {
@@ -11,13 +12,22 @@ class ProductController {
     // TODO: Add try/catch for fetching of data
     let products = dbService.getAllProducts();
     if (req.query.sort) {
-      if (req.query.sort === 'asc') {
-        products = serverUtils.sortedByAsc(products, 'price');
-      } else if (req.query.sort === 'desc') {
-        products = serverUtils.sortedByDesc(products, 'price');
-      } else {
-        products = serverUtils.sortedByKey(products, req.query.sort);
-      }
+      products = serverUtils.sortProducts(products, req.query.sort);
+    }
+    if (req.query.minPrice || req.query.maxPrice) {
+      products = serverUtils.filteredByMinMax(
+        products,
+        'price',
+        req.query.minPrice,
+        req.query.maxPrice
+      );
+    }
+    if (req.query.filterCategory) {
+      products = serverUtils.filteredBy(
+        products,
+        'category',
+        req.query.filterCategory
+      );
     }
     if (req.query.offset) {
       products = serverUtils.withOffset(products, parseInt(req.query.offset));

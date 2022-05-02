@@ -28,6 +28,15 @@ const withOffset = (products, offset) => {
   );
 };
 
+const sortProducts = (products, sortType) => {
+  if (sortType === 'asc') {
+    return serverUtils.sortedByAsc(products, 'price');
+  } else if (sortType === 'desc') {
+    return serverUtils.sortedByDesc(products, 'price');
+  }
+  return serverUtils.sortedByKey(products, sortType);
+};
+
 const sortedByKey = (products, sortingKey) => {
   return products.sort((a, b) => sortBy(a[sortingKey], b[sortingKey]));
 };
@@ -42,6 +51,17 @@ const sortedByDesc = (products, key) => {
 
 const filteredBy = (products, key, value) => {
   return products.filter((p) => p[key] === value);
+};
+
+const filteredByMinMax = (products, key, minValue, maxValue) => {
+  // TODO: Can make on which of min/max values excists to shorten api and only to neccessary filtering
+  if (minValue) {
+    products = products.filter((p) => p[key] >= minValue);
+  }
+  if (maxValue) {
+    products = products.filter((p) => p[key] <= maxValue);
+  }
+  return products;
 };
 
 const sortBy = (a, b) => {
@@ -71,7 +91,10 @@ const findSimilarProducts = (products, target) => {
 module.exports.createNewProduct = createNewProduct;
 module.exports.sortBy = sortBy;
 module.exports.withOffset = withOffset;
+module.exports.sortProducts = sortProducts;
 module.exports.sortedByKey = sortedByKey;
 module.exports.sortedByAsc = sortedByAsc;
 module.exports.sortedByDesc = sortedByDesc;
+module.exports.filteredBy = filteredBy;
+module.exports.filteredByMinMax = filteredByMinMax;
 module.exports.findSimilarProducts = findSimilarProducts;
